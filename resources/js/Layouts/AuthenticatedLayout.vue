@@ -35,10 +35,10 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('indication.index')" :active="route().current('indication.*')">
                                     All Indication
                                 </NavLink>
-                                <NavLink :href="route('indication.index')" :active="route().current('indication.*')">
+                                <NavLink :href="route('problem.index')" :active="route().current('problem.*')">
                                     All Problem
                                 </NavLink>
-                                <NavLink :href="route('indication.index')" :active="route().current('indication.*')">
+                                <NavLink :href="route('rule.index')" :active="route().current('rule.*')">
                                     All Rule
                                 </NavLink>
                             </div>
@@ -124,13 +124,13 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <!-- <ResponsiveNavLink :href="route('indication')" :active="route().current('indication')">
+                        <ResponsiveNavLink :href="route('indication.index')" :active="route().current('indication.*')">
                             All Indication
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('indication')" :active="route().current('indication')">
+                        <ResponsiveNavLink :href="route('problem.index')" :active="route().current('problem.*')">
                             All Problem
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('indication')" :active="route().current('indication')">
+                        <!-- <ResponsiveNavLink :href="route('indication')" :active="route().current('indication')">
                             All Rule
                         </ResponsiveNavLink> -->
                     </div>

@@ -28,7 +28,7 @@ class IndicationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $indication = Indication::query()->filter($request);
 
@@ -62,15 +62,15 @@ class IndicationController extends Controller
         return redirect('indication');
     }
 
-    public function generateIndicationCode()
+    protected function generateIndicationCode()
     {
-        return 'B' . Str::padLeft((intval(Indication::query()->latest()->first()?->code) + 1), 2, '0');
+        return 'B' . Str::padLeft((intval(str(Indication::query()->latest()->first()?->code)->replace('B', '')->toString()) + 1), 2, '0');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Indication $indication)
+    public function show(Indication $indication): Response
     {
         return Inertia::render('Indication/Show', [
             'indication' => $indication
@@ -80,7 +80,7 @@ class IndicationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Indication $indication)
+    public function edit(Indication $indication): Response
     {
         return Inertia::render('Indication/Form', $indication->toArray());
     }
@@ -88,7 +88,7 @@ class IndicationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Indication $indication)
+    public function update(Request $request, Indication $indication): RedirectResponse
     {
         $request->validate(['name' => 'required|string|max:255']);
 
@@ -102,7 +102,7 @@ class IndicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Indication $indication)
+    public function destroy(Indication $indication): RedirectResponse
     {
         $indication->delete();
 

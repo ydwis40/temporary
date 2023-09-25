@@ -5,26 +5,28 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 
-interface Indication {
+interface Problem {
     id: number;
     name: string;
     code: string;
+    solution: string;
 }
 
 const props = defineProps<{
-    indication: Indication | null
+    problem: Problem | null
 }>();
 
-const newIndication = {
-    name: props.indication?.name ?? '',
+const newProblem = {
+    name: props.problem?.name ?? '',
+    solution: props.problem?.solution ?? '',
 }
 
-const form = useForm(newIndication);
+const form = useForm(newProblem);
 
 const submit = () => {
-    return props.indication ? form.put(route('indication.update', props.indication.id), {
+    return props.problem ? form.put(route('problem.update', props.problem.id), {
         preserveScroll: true,
-    }) : form.post(route('indication.store'), {
+    }) : form.post(route('problem.store'), {
         preserveScroll: true,
     });
 };
@@ -33,7 +35,7 @@ const submit = () => {
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Indication</h2>
+            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">Problem</h2>
         </header>
 
         <form @submit.prevent="submit" class="mt-6 space-y-6">
@@ -51,6 +53,22 @@ const submit = () => {
                 />
 
                 <InputError class="mt-2" :message="form.errors.name" />
+            </div>
+
+            <div>
+                <InputLabel for="solution" value="Solution" />
+
+                <TextInput
+                    id="solution"
+                    type="text"
+                    class="mt-1 block w-full"
+                    v-model="form.solution"
+                    required
+                    autofocus
+                    autocomplete="solution"
+                />
+
+                <InputError class="mt-2" :message="form.errors.solution" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

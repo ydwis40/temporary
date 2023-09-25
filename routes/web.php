@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\IndicationController;
+use App\Http\Controllers\IndicationProblemController;
+use App\Http\Controllers\ProblemController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('indication', IndicationController::class);
+    Route::resource('problem', ProblemController::class);
+    Route::resource('rule', IndicationProblemController::class);
 });
 
 require __DIR__.'/auth.php';
